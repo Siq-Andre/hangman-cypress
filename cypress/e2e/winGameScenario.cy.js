@@ -1,28 +1,26 @@
 describe('check url access', () => {
     it('check if the basic url is working', () => {
       let arrayLetters = [];
+      let clickedLetters = new Set(); 
    
-      cy.visit('/'); // Substitua pela URL correta, se necessário
+      cy.visit('/'); 
    
-      // Intercepta o console.log para capturar a palavra
-      cy.window().then((win) => {
-        // Substitui console.log para capturar as mensagens
-        cy.stub(win.console, 'log').callsFake((msg) => {
-          // Verifica se a mensagem é um array de letras
-          if (Array.isArray(msg) && msg.every(char => typeof char === 'string')) {
-            arrayLetters = msg;
+      cy.window().then((window) => {
+        cy.stub(window.console, 'log').callsFake((message) => {
+          if (Array.isArray(message) && message.every(char => typeof char === 'string')) {
+            arrayLetters = message;
           }
         });
       });
    
-      // Aguarde um pouco para garantir que a palavra foi capturada
-      cy.wait(5000).then(() => {
-        // Certifique-se de que a palavra foi capturada
+      cy.wait(2500).then(() => {
         expect(arrayLetters.length).to.be.greaterThan(0);
    
-        // Para cada letra na palavra, encontre o botão correspondente e clique
         arrayLetters.forEach((letra) => {
-          cy.get(`[data-test="letter-button-${letra}"]`).click();
+          if (!clickedLetters.has(letra)) {
+            cy.get(`[data-test="letter-button-${letra}"]`).click();
+            clickedLetters.add(letra); 
+          }
         });
       });
     });
