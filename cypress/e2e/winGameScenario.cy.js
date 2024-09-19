@@ -1,5 +1,5 @@
-describe('check url access', () => {
-    it('check if the basic url is working', () => {
+describe('tests game win', () => {
+    it('press the correct letter buttons and win the game', () => {
       let arrayLetters = [];
       let clickedLetters = new Set(); 
    
