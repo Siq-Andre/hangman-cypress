@@ -1,5 +1,5 @@
-describe('check url access', () => {
-    it('check if the basic url is working', () => {
+describe('tests game lose', () => {
+    it('press the incorrect letter buttons and lose the game', () => {
       let arrayLetters = [];
       let clickedLetters = new Set(); 
       const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
