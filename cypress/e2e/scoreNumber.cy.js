@@ -32,7 +32,7 @@ describe('Check game score in win streak and in game lose scenario', () => {
   
         cy.get(`[data-test="score"]`)
           .should('exist')
-          .and('have.text', `Pontuação: ${scorePoints++}`);
+          .and('have.text', `${scorePoints++}`);
   
         cy.get(`[data-test="btn-newGame"]`).click();
       });
@@ -60,7 +60,8 @@ describe('Check game score in win streak and in game lose scenario', () => {
             clickedLetters.add(letra);
           }
         });
-        cy.get(`[data-test="score"]`).should('exist').and('have.text', `Pontuação: 0`);
+        let scorePointsZero = 0;
+        cy.get(`[data-test="score"]`).should('exist').and('have.text', `${scorePointsZero}`);
       });
     });
   });
